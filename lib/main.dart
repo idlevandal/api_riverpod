@@ -36,7 +36,8 @@ class MyApp extends StatelessWidget {
 class Home extends ConsumerWidget {
   final jsonData = '{ "name": "Pizza da Mario", "cuisine": "Italian", "yearOpened": 1967,'
       '"reviews": [{"score": 33.0, "review": "terrible"}, {"score": 45, "review": "reasonable"}],'
-      '"staff": [{"name": "Dave", "phoneNumber": "555-555"}, {"name": "Jim", "phoneNumber": "222-2222"}]'
+      '"staff": [{"name": "Dave", "phoneNumber": "555-555"}, {"name": "Jim", "phoneNumber": "222-2222"}],'
+      '"menuItems": [{"title": "Baked Spuds", "description": "Freaking awesome!!!", "price": 2.24}, {"title": "Vegan Pie", "description": "Freaking delicious!!!", "price": 5.55}]'
       '}';
   final jsonDataNoName = '{"cuisine": "Italian" }';
   final jsonArrayData = '[{ "name": "Pizza da Mario", "cuisine": "Italian" }, { "name": "El Rancho", "cuisine": "Mexican" }]';
@@ -44,8 +45,9 @@ class Home extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final users = watch(userProvider);
-    // final parsedJson = jsonDecode(jsonData);
-    // final res = Restaurant.fromJson(parsedJson);
+    final parsedJson = jsonDecode(jsonData);
+    final res = Restaurant.fromJson(parsedJson);
+    print('Menu items: ${res.menuItems}');
     // print('Name: ${res.name}');
     // print('Cuisine: ${res.cuisine}');
     // print('Year Opened: ${res.yearOpened}');

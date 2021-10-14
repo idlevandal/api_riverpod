@@ -7,6 +7,7 @@ class Restaurant {
     this.yearOpened,
     required this.reviews,
     required this.staff,
+    required this.menuItems,
   });
   final String name;
   final String cuisine;
@@ -14,6 +15,7 @@ class Restaurant {
   final bool hasIndoorSeating;
   final List<Review> reviews;
   final List<Staff> staff;
+  final List<MenuItem> menuItems;
 
   factory Restaurant.fromJson(Map<String, dynamic> data) {
     final name = data['name'] as String?; // cast to nullable string
@@ -31,13 +33,18 @@ class Restaurant {
     final staff = staffData != null
         ? staffData.map((el) => Staff.fromJson(el)).toList()
         : <Staff>[];
+    final menuItemsData = data['menuItems'] as List<dynamic>?;
+    final menuItems = menuItemsData != null
+        ? menuItemsData.map((el) => MenuItem.fromJson(el)).toList()
+        : <MenuItem>[];
     return Restaurant(
-        name: name,
-        cuisine: cuisine,
-        yearOpened: yearOpened,
-        hasIndoorSeating: hasIndoorSeating,
-        reviews: reviews,
-        staff: staff
+      name: name,
+      cuisine: cuisine,
+      yearOpened: yearOpened,
+      hasIndoorSeating: hasIndoorSeating,
+      reviews: reviews,
+      staff: staff,
+      menuItems: menuItems,
     );
   }
 
@@ -95,6 +102,32 @@ class Staff {
     return {
       'name': name,
       'phoneNumber': phoneNumber
+    };
+  }
+
+  @override
+  String toString() => toJson().toString();
+}
+
+class MenuItem {
+  String title;
+  String description;
+  double price;
+
+  MenuItem({required this.title, required this.description, required this.price});
+
+  factory MenuItem.fromJson(Map<String, dynamic> data) {
+    final title = data['title'];
+    final description = data['description'];
+    final price = data['price'];
+    return MenuItem(title: title, description: description, price: price);
+  }
+  
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'description': description,
+      'price': price,
     };
   }
 
