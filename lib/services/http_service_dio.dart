@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:paint_projex_lite/common/constants/constants.dart';
 
+// https://blog.logrocket.com/networking-flutter-using-dio/
+
 class HttpService {
   final Dio _dio = Dio(
     BaseOptions(
